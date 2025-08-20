@@ -56,6 +56,7 @@ class Constants
 
     // Files
     public const FILE_CHECKED_FILENAME = 'checked';
+    public const FILE_CHECKED_VERSION = 'v01.00.10';
 
     // Themes
     public const THEME_DEFAULT = 'base';

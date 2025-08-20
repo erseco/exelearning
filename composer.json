@@ -105,8 +105,7 @@
     },
     "extra": {
         "symfony": {
-            "docker": false,
-            "allow-contrib": true
+            "docker": false
         }
     }
 }
