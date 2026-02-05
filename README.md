@@ -78,6 +78,8 @@ To deploy eXeLearning in a production environment, see:
 - Sample Compose files: [doc/deploy/README.md](./doc/deploy/README.md)
 - Upgrading from previous versions: [UPGRADE.md](./UPGRADE.md)
 
+When both `ADMIN_EMAIL` and `ADMIN_PASSWORD` are set, an admin user will be created the first time the application is started.
+
 ## Development Environment
 
 See [doc/development/environment.md](./doc/development/environment.md) for full setup instructions.
@@ -88,7 +90,11 @@ cd exelearning
 make up-local
 ```
 
-This will install dependencies, build assets, and start the development server at `http://localhost:8080` with hot reload.
+In a development deploy is recommended to set `APP_ENV=dev` in `.env`. 
+
+This will install dependencies, build assets, and start the development server at `http://localhost:8080` with hot reload. 
+
+If `APP_ENV=dev` and both `TEST_USER_EMAIL` and `TEST_USER_PASSWORD` are set, a test user will be created the first time the application is started.
 
 More development tools, options, and real-time collaboration info are documented in the `doc/` folder. See also [Architecture Documentation](./doc/architecture.md).
 
