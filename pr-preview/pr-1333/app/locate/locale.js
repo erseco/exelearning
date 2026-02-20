@@ -1,0 +1,140 @@
+export default class Locale {
+    constructor(app) {
+        this.app = app;
+        this.lang = null;
+        this.strings = {};
+        this.c_strings = {};
+        window._ = (s, idevice) => {
+            // If idevice is passed, use getTranslation with iDevice support
+            // Otherwise, use getGUITranslation (which has special processing: ~prefix, \\/)
+            if (idevice) {
+                return this.getTranslation(s, null, idevice);
+            }
+            return this.getGUITranslation(s);
+        };
+        window.c_ = (s) => {
+            // elp → elpx (to review - #498)
+            s = this.getContentTranslation(s);
+            s = s.replace(' (elp)', ' (elpx)');
+            s = s.replace(' .elp ', ' .elpx ');
+            s = s.replace(' elp ', ' elpx ');
+            if (s.endsWith('.elp')) s += 'x';
+            return s;
+        };
+    }
+
+    /**
+     *
+     * @param {*} lang
+     */
+    async init() {
+        this.setLocaleLang(this.app.eXeLearning.config.locale);
+        await this.loadTranslationsStrings();
+    }
+
+    async loadContentTranslationsStrings(lang) {
+        // Use ApiCallManager which handles both static and server modes internally
+        // Result structure: { translations: { "key": "value", ... }, count?: number }
+        const result = await this.app.api.getTranslations(lang);
+        this.c_strings = result || {};
+    }
+
+    /**
+     *
+     * @param {*} lang
+     */
+    async setLocaleLang(lang) {
+        this.lang = lang;
+        document.querySelector('body').setAttribute('lang', lang);
+    }
+
+    /**
+     * Load translation strings from API (works in both static and server mode)
+     */
+    async loadTranslationsStrings() {
+        // Use ApiCallManager which handles both static and server modes internally
+        // Result structure: { translations: { "key": "value", ... }, count?: number }
+        const result = await this.app.api.getTranslations(this.lang);
+        this.strings = result || {};
+    }
+
+    getGUITranslation(string) {
+        if (typeof string != 'string') return '';
+        string = string ? string.replace(/"/g, '\\"') : '';
+
+        if (
+            this.strings &&
+            this.strings.translations &&
+            string in this.strings.translations
+        ) {
+            let res = this.strings.translations[string]
+                .replace(/\\"/g, '"')
+                .replace(/\\\//g, '/');
+            // Remove ~ prefix if present
+            if (res.startsWith('~')) {
+                res = res.substring(1);
+            }
+            return res;
+        } else {
+            return string.replace(/\\"/g, '"');
+        }
+    }
+
+    getContentTranslation(string) {
+        if (typeof string != 'string') return '';
+        string = string ? string.replace(/"/g, '\\"') : '';
+
+        if (
+            this.c_strings &&
+            this.c_strings.translations &&
+            string in this.c_strings.translations
+        ) {
+            let res = this.c_strings.translations[string]
+                .replace(/\\"/g, '"')
+                .replace(/\\\//g, '/');
+            // Remove ~ prefix if present
+            if (res.startsWith('~')) {
+                res = res.substring(1);
+            }
+            return res;
+        } else {
+            return string.replace(/\\"/g, '"').replace(/\\\//g, '/');
+        }
+    }
+
+    /**
+     *
+     * @param {*} string
+     * @returns
+     */
+    getTranslation(string, lang, idevice) {
+        if (typeof string != 'string') return '';
+        string = string ? string.replace(/"/g, '\\"') : '';
+        lang = lang ? lang : this.lang;
+        // Idevice po translation
+        if (idevice) {
+            let stringConcIdevice = `${idevice}.${string}`;
+            if (
+                this.strings &&
+                this.strings.translations &&
+                stringConcIdevice in this.strings.translations
+            ) {
+                return this.strings.translations[stringConcIdevice].replace(
+                    /\\"/g,
+                    '"'
+                );
+            }
+        }
+
+        // Default translation
+        if (
+            this.strings &&
+            this.strings.translations &&
+            string in this.strings.translations
+        ) {
+            return this.strings.translations[string].replace(/\\"/g, '"');
+        } else {
+            return string.replace(/\\"/g, '"');
+        }
+    }
+}

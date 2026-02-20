@@ -1,0 +1,24 @@
+/* Blocks */
+.exe-block-warning{background:#FCF8E3;color:#796034;border:1px solid #FAEBCC;padding:0 1em;border-radius:4px}
+p.exe-block-warning{padding:1em}
+.exe-block-alert{background:#ffc;color:#855000;border:1px solid #FFF099;padding:0 1em;border-radius:4px}
+p.exe-block-alert{padding:1em}
+.exe-block-danger{background:#FEF0EF;color:#973C3B;border:1px solid #F3DADD;padding:0 1em;border-radius:4px}
+p.exe-block-danger{padding:1em}
+.exe-block-info{background:#E1F1F9;color:#2B627D;border:1px solid #C9EDF4;padding:0 1em;border-radius:4px}
+p.exe-block-info{padding:1em}
+.exe-block-success{background:#E5F3E0;color:#336634;border:1px solid #DEEDD1;padding:0 1em;border-radius:4px}
+p.exe-block-success{padding:1em}
+.exe-block-warning a{color:#4F360A}
+.exe-block-alert a{color:#5B2600}
+.exe-block-danger a{color:#6D1211}
+.exe-block-info a{color:#063853}
+.exe-block-success a{color:#093C0A}
+/* In TinyMCE, hidden elements are shown */
+body .exe-hidden{display:inherit;filter:alpha(opacity=40);opacity:0.4;margin:0.5em;padding-left:25px;background:url(../img/exe_hidden.png) no-repeat 0 0}
+body .exe-hidden-accessible{position:static;overflow:visible;clip:auto;height:auto;filter:alpha(opacity=40);opacity:0.4;margin:0.5em;padding-left:25px;background:url(../img/exe_hidden_accessible.png) no-repeat 0 0}
+/* Structured lists */
+ol.auto-numbered{counter-reset:item}
+.auto-numbered ol{counter-reset:item}
+.auto-numbered li{display:block}
+.auto-numbered li:before {content:counters(item,".") ".- ";counter-increment:item}
