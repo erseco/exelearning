@@ -1,0 +1,270 @@
+/* Wikipedia content imported into eXe. Taken from en.wikipedia.org. */
+.exe-wikipedia-content .vector-appearance-pinnable-header{display:none}
+.exe-wikipedia-content table.floatleft{float:left;position:relative;margin:0 .5em .5em 0;border:0}
+.exe-wikipedia-content .div.floatleft p{font-style:italic}
+/* Thumbnails */
+.exe-wikipedia-content div.thumb{margin-bottom:.5em}
+.exe-wikipedia-content div.thumb div{border:1px solid #ccc;padding:3px !important;background-color:#f9f9f9;font-size:94%;text-align:center;overflow:hidden}
+.exe-wikipedia-content div.thumb div a img{border:1px solid #ccc}
+.exe-wikipedia-content div.thumb div div.thumbcaption{border:none;text-align:left;line-height:1.4em;padding:.3em 0 .1em 0}
+.exe-wikipedia-content div.magnify{float:right;border:none !important;background:none !important}
+.exe-wikipedia-content div.magnify a,
+.exe-wikipedia-content div.magnify img{display:block;border:none !important;background:none !important}
+.exe-wikipedia-content div.tright{clear:right;float:right;border-width:.5em 0 .8em 1.4em;margin-left:.5em}
+.exe-wikipedia-content div.tleft{float:left;margin-right:.5em;border-width:.5em 1.4em .8em 0}
+/* Infobox template */
+.exe-wikipedia-content .infobox{border:1px solid #aaa;background-color:#f9f9f9;color:#000;margin-bottom:0.7em;margin-left:1.2em;padding:0.2em;float:right;clear:right}
+.exe-wikipedia-content .infobox td,
+.exe-wikipedia-content .infobox th,
+.exe-wikipedia-content .infobox_v2 td,
+.exe-wikipedia-content .infobox_v2 th{vertical-align:top}
+.exe-wikipedia-content .infobox caption{font-size:larger;margin-left:inherit}
+.exe-wikipedia-content .infobox_v2{border:1px solid #B4BBC8;background-color:#f9f9f9;color:#000;margin:.5em 0 .7em 1.2em;padding:.4em;clear:right;float:right;font-size:90%;line-height:1.5em;width:22.5em}
+.exe-wikipedia-content .infobox_v2 .cabecera{font-size:140%;font-weight:bolder;height:45px;line-height:1.2em;text-align:center;vertical-align:middle}
+.exe-wikipedia-content .infobox_v2 .media{font-weight:bolder;height:35px;text-align:center;vertical-align:middle}
+.exe-wikipedia-content .infobox.bordered{border-collapse:collapse}
+.exe-wikipedia-content .infobox.bordered td,
+.exe-wikipedia-content .infobox.bordered th{border:1px solid #B4BBC8}
+.exe-wikipedia-content .infobox.bordered .borderless td,
+.exe-wikipedia-content .infobox.bordered .borderless th{border:0}
+.exe-wikipedia-content .infobox.sisterproject{width:20em;font-size:90%}
+/* wikipedia tables of contents */
+.exe-wikipedia-content #toc,
+.exe-wikipedia-content .toc{border:1px solid #aaa;background-color:#f9f9f9;padding:5px;font-size:95%;display:inline-block}
+.exe-wikipedia-content #toc h2,
+.exe-wikipedia-content .toc h2{display:inline;border:none;padding:0;font-size:100%;font-weight:bold}
+.exe-wikipedia-content #toc #toctitle,
+.exe-wikipedia-content .toc #toctitle,
+.exe-wikipedia-content #toc .toctitle,
+.exe-wikipedia-content .toc .toctitle{text-align:center}
+.exe-wikipedia-content #toc ul,
+.exe-wikipedia-content .toc ul{list-style-type:none;list-style-image:none;margin-left:0;padding-left:0;text-align:left}
+.exe-wikipedia-content #toc ul ul,
+.exe-wikipedia-content .toc ul ul{margin:0 0 0 2em}
+.exe-wikipedia-content #toc .toctoggle,
+.exe-wikipedia-content .toc .toctoggle{font-size:94%}
+/* Lists in tables */
+.exe-wikipedia-content .mw-content-ltr ul,
+.exe-wikipedia-content .mw-content-rtl .mw-content-ltr ul{margin:0.3em 0 0 1.6em;padding:0}
+.exe-wikipedia-content .mw-content-rtl ul,
+.exe-wikipedia-content .mw-content-ltr .mw-content-rtl ul{margin:0.3em 1.6em 0 0;padding:0}
+.exe-wikipedia-content .mw-content-ltr ol,
+.exe-wikipedia-content .mw-content-rtl .mw-content-ltr ol{margin:0.3em 0 0 3.2em;padding:0}
+.exe-wikipedia-content .mw-content-rtl ol,
+.exe-wikipedia-content .mw-content-ltr .mw-content-rtl ol{margin:0.3em 3.2em 0 0;padding:0}
+.exe-wikipedia-content .mw-content-ltr dd,
+.exe-wikipedia-content .mw-content-rtl .mw-content-ltr dd{margin-left:1.6em;margin-right:0}
+.exe-wikipedia-content .mw-content-rtl dd,
+.exe-wikipedia-content .mw-content-ltr .mw-content-rtl dd{margin-right:1.6em;margin-left:0}
+/* Menu lists */
+.exe-wikipedia-content .hlist dl,
+.exe-wikipedia-content .hlist ol,
+.exe-wikipedia-content .hlist ul{margin:0;padding:0}
+.exe-wikipedia-content .hlist dd,
+.exe-wikipedia-content .hlist dt,
+.exe-wikipedia-content .hlist li{margin:0;display:inline;white-space:nowrap}
+.exe-wikipedia-content .hlist dl dl,
+.exe-wikipedia-content .hlist dl ol,
+.exe-wikipedia-content .hlist dl ul,
+.exe-wikipedia-content .hlist ol dl,
+.exe-wikipedia-content .hlist ol ol,
+.exe-wikipedia-content .hlist ol ul,
+.exe-wikipedia-content .hlist ul dl,
+.exe-wikipedia-content .hlist ul ol,
+.exe-wikipedia-content .hlist ul ul{display:inline;white-space:normal}
+.exe-wikipedia-content .hlist dt:after{content:":"}
+.exe-wikipedia-content .hlist dd:after,
+.exe-wikipedia-content .hlist li:after{content:" ·";font-weight:bold}
+.exe-wikipedia-content .hlist dd:last-child:after,
+.exe-wikipedia-content .hlist dt:last-child:after,
+.exe-wikipedia-content .hlist li:last-child:after{content:none}
+.exe-wikipedia-content .hlist dd.hlist-last-child:after,
+.exe-wikipedia-content .hlist dt.hlist-last-child:after,
+.exe-wikipedia-content .hlist li.hlist-last-child:after{content:none}
+.exe-wikipedia-content .hlist dd dd:first-child:before,
+.exe-wikipedia-content .hlist dd dt:first-child:before,
+.exe-wikipedia-content .hlist dd li:first-child:before,
+.exe-wikipedia-content .hlist dt dd:first-child:before,
+.exe-wikipedia-content .hlist dt dt:first-child:before,
+.exe-wikipedia-content .hlist dt li:first-child:before,
+.exe-wikipedia-content .hlist li dd:first-child:before,
+.exe-wikipedia-content .hlist li dt:first-child:before,
+.exe-wikipedia-content .hlist li li:first-child:before{content:"(";font-weight:normal}
+.exe-wikipedia-content .hlist dd dd:last-child:after,
+.exe-wikipedia-content .hlist dd dt:last-child:after,
+.exe-wikipedia-content .hlist dd li:last-child:after,
+.exe-wikipedia-content .hlist dt dd:last-child:after,
+.exe-wikipedia-content .hlist dt dt:last-child:after,
+.exe-wikipedia-content .hlist dt li:last-child:after,
+.exe-wikipedia-content .hlist li dd:last-child:after,
+.exe-wikipedia-content .hlist li dt:last-child:after,
+.exe-wikipedia-content .hlist li li:last-child:after{content:")";font-weight:normal}
+.exe-wikipedia-content .hlist dd dd.hlist-last-child:after,
+.exe-wikipedia-content .hlist dd dt.hlist-last-child:after,
+.exe-wikipedia-content .hlist dd li.hlist-last-child:after,
+.exe-wikipedia-content .hlist dt dd.hlist-last-child:after,
+.exe-wikipedia-content .hlist dt dt.hlist-last-child:after,
+.exe-wikipedia-content .hlist dt li.hlist-last-child:after,
+.exe-wikipedia-content .hlist li dd.hlist-last-child:after,
+.exe-wikipedia-content .hlist li dt.hlist-last-child:after,
+.exe-wikipedia-content .hlist li li.hlist-last-child:after{content:")";font-weight:normal}
+.exe-wikipedia-content .hlist.hnum ol{counter-reset:list-item}
+.exe-wikipedia-content .hlist.hnum ol>li{counter-increment:list-item}
+.exe-wikipedia-content .hlist.hnum ol>li:before{content:counter(list-item) " "}
+.exe-wikipedia-content .hlist.hnum dd ol>li:first-child:before,
+.exe-wikipedia-content .hlist.hnum dt ol>li:first-child:before,
+.exe-wikipedia-content .hlist.hnum li ol>li:first-child:before{content:"(" counter(list-item) " "}
+.exe-wikipedia-content .plainlist ul{line-height:inherit;list-style:none none;margin:0}
+.exe-wikipedia-content .plainlist ul li{margin-bottom:0}
+.exe-wikipedia-content div.floatright{float:right;clear:right;position:relative;margin:0.2em 0 0.8em 1.4em}
+.exe-wikipedia-content div.floatleft{float:left;clear:left;position:relative;margin:0.2em 1.4em 0.8em 0}
+.exe-wikipedia-content table.navbox{border:1px solid #aaa;width:100%;margin:auto;clear:both;font-size:88%;text-align:center;padding:1px}
+.exe-wikipedia-content table.navbox+table.navbox{margin-top:-1px}
+.exe-wikipedia-content .navbox th,
+.exe-wikipedia-content .navbox-title,
+.exe-wikipedia-content .navbox-abovebelow{text-align:center;padding-left:1em;padding-right:1em}
+.exe-wikipedia-content th.navbox-group{white-space:nowrap;text-align:right;background:#E7E7E7 !important}
+.exe-wikipedia-content .navbox,
+.exe-wikipedia-content .navbox-subgroup{background:#fdfdfd}
+.exe-wikipedia-content .navbox-list{border-color:#fdfdfd}
+.exe-wikipedia-content .navbox th,
+.exe-wikipedia-content .navbox-title{background:#CFCFCF}
+.exe-wikipedia-content .navbox-abovebelow,
+.exe-wikipedia-content th.navbox-group,
+.exe-wikipedia-content .navbox-subgroup .navbox-title{background:#DFDFDF}
+.exe-wikipedia-content .navbox-subgroup .navbox-group,
+.exe-wikipedia-content .navbox-subgroup .navbox-abovebelow{background:#E7E7E7}
+.exe-wikipedia-content .navbox-even{background:#f7f7f7}
+.exe-wikipedia-content .navbox-odd{background:transparent}
+.exe-wikipedia-content .navbox .hlist td dl,
+.exe-wikipedia-content .navbox .hlist td ol,
+.exe-wikipedia-content .navbox .hlist td ul,
+.exe-wikipedia-content .navbox td.hlist dl,
+.exe-wikipedia-content .navbox td.hlist ol,
+.exe-wikipedia-content .navbox td.hlist ul{padding:0.125em 0}
+.exe-wikipedia-content .navbox .hlist dd,
+.exe-wikipedia-content .navbox .hlist dt,
+.exe-wikipedia-content .navbox .hlist li{white-space:nowrap;white-space:normal !ie}
+.exe-wikipedia-content .navbox .hlist dd dl,
+.exe-wikipedia-content .navbox .hlist dt dl,
+.exe-wikipedia-content .navbox .hlist li ol,
+.exe-wikipedia-content .navbox .hlist li ul{white-space:normal}
+.exe-wikipedia-content ol+table.navbox,
+.exe-wikipedia-content ul+table.navbox{margin-top:0.5em}
+.exe-wikipedia-content .navbar{display:inline;font-size:88%;font-weight:normal}
+.exe-wikipedia-content .navbar ul{display:inline;white-space:nowrap}
+.exe-wikipedia-content .navbar li{word-spacing:-0.125em}
+.exe-wikipedia-content .navbox .navbar{display:block;font-size:100%}
+.exe-wikipedia-content .navbox-title .navbar{float:left;text-align:left;margin-right:0.5em;width:6em}
+/* Other elements */
+.exe-wikipedia-content .mw-heading2 h2{margin-top:1em}
+.exe-wikipedia-content #siteNotice{display:none}
+.exe-wikipedia-content .firstHeading,
+.exe-wikipedia-content #firstHeading{margin-top:0;font-size:1.5em}
+.exe-wikipedia-content #contentSub,
+.exe-wikipedia-content #contentSub2{font-size:84%;line-height:1.2em;margin:0 0 1.4em 1em;color:#7d7d7d;width:auto}
+.exe-wikipedia-content .rellink,
+.exe-wikipedia-content .dablink{font-style:italic;padding-left:1.6em;margin-bottom:0.5em}
+.exe-wikipedia-content .rellink i,
+.exe-wikipedia-content .dablink i{font-style:normal}
+.exe-wikipedia-content #wikipedia-content pre,
+.exe-wikipedia-content #wikipedia-content code,
+.exe-wikipedia-content #wikipedia-content tt,
+.exe-wikipedia-content #wikipedia-content kbd,
+.exe-wikipedia-content #wikipedia-content samp,
+.exe-wikipedia-content .mw-code{font-family:monospace,Courier}
+.exe-wikipedia-content #wikipedia-content code{background-color:#f9f9f9}
+.exe-wikipedia-content #wikipedia-content pre,
+.exe-wikipedia-content #wikipedia-content .mw-code{padding:1em;border:1px dashed #6A6A6A;color:#000;background-color:#f9f9f9}
+/* Screen reader */
+.exe-wikipedia-content .mw-jump{position:absolute;left:-9999em;overflow:hidden}
+/* 2020 */
+/* Galleries */
+.exe-wikipedia-content ul.gallery{margin:2px;padding:2px;display:block}
+.exe-wikipedia-content li.gallerycaption{font-weight:bold;text-align:center;display:block;word-wrap:break-word}
+.exe-wikipedia-content li.gallerybox{vertical-align:top;display:-moz-inline-box;display:inline-block}
+.exe-wikipedia-content li.gallerybox div.thumb{text-align:center;margin:2px}
+.exe-wikipedia-content li.gallerybox div.thumb img{display:block;margin:0 auto}
+.exe-wikipedia-content div.gallerytext{overflow:hidden;font-size:94%;padding:2px 4px;word-wrap:break-word}
+.exe-wikipedia-content .galleryfilename{display:block}
+.exe-wikipedia-content .galleryfilename-truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exe-wikipedia-content ul.mw-gallery-nolines li.gallerybox div.thumb{background-color:transparent;border:0}
+.exe-wikipedia-content ul.mw-gallery-nolines li.gallerybox div.gallerytext{text-align:center}
+.exe-wikipedia-content ul.mw-gallery-packed,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay,
+.exe-wikipedia-content ul.mw-gallery-packed-hover{text-align:center}
+.exe-wikipedia-content ul.mw-gallery-packed li.gallerybox div.thumb,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.thumb,
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox div.thumb{background-color:transparent;border:0}
+.exe-wikipedia-content ul.mw-gallery-packed li.gallerybox div.thumb img,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.thumb img,
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox div.thumb img{margin:0 auto}
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox{position:relative}
+.exe-wikipedia-content ul.mw-gallery-packed-hover div.gallerytextwrapper{overflow:hidden;height:0}
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper,
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper{position:absolute;background:#fff;background:rgba(255, 255, 255, 0.8);padding:5px 10px;bottom:0;left:0;height:auto;max-height:40%;overflow:hidden;font-weight:bold;margin:2px}
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper p,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper p,
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper p{text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper:hover,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper:hover,
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper:hover{overflow:visible;max-height:none}
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper:hover p,
+.exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper:hover p,
+.exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper:hover p{text-overflow:clip;white-space:normal;overflow:visible}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow{display:block;margin:4em 0}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .gallerycaption{font-size:1.3em;margin:0}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .gallerycarousel{display:block;text-align:center}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .gallerycarousel.mw-gallery-slideshow-thumbnails-toggled{margin-bottom:1.3em}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .mw-gallery-slideshow-buttons{opacity:0.5;padding:1.3em 0;white-space:nowrap}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .mw-gallery-slideshow-buttons .oo-ui-buttonElement{margin:0 2em}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .mw-gallery-slideshow-buttons .oo-ui-buttonElement:first-child{margin-left:0}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .mw-gallery-slideshow-buttons .oo-ui-buttonElement:last-child{margin-right:0}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .gallerybox.slideshow-current{background:#efefef}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .gallerybox>div{max-width:120px}
+.exe-wikipedia-content ul.gallery.mw-gallery-slideshow .gallerybox div.thumb{border:0;background:transparent}
+.exe-wikipedia-content .mw-gallery-slideshow-img-container a{display:block}
+@media screen{
+    .exe-wikipedia-content li.gallerybox div.thumb{border:1px solid #c8ccd1;background-color:#f8f9fa}
+}
+@media print{
+    .exe-wikipedia-content li.gallerybox{vertical-align:top;display:inline-block}
+    .exe-wikipedia-content ul.gallery{margin:2px;padding:2px;display:block}
+    .exe-wikipedia-content li.gallerycaption{font-weight:bold;text-align:center;display:block;word-wrap:break-word}
+    .exe-wikipedia-content li.gallerybox div.thumb{background-color:#fff;border:1px solid #ccc}
+    .exe-wikipedia-content div.gallerytext{overflow:visible}
+    .exe-wikipedia-content ul.mw-gallery-packed-hover div.gallerytextwrapper{overflow:visible;height:auto}
+    .exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper,
+    .exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper,
+    .exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper{position:static;background:transparent;padding:0;bottom:0;max-height:none;overflow:visible;font-weight:normal;margin:0}
+    .exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox:hover div.gallerytextwrapper p,
+    .exe-wikipedia-content ul.mw-gallery-packed-overlay li.gallerybox div.gallerytextwrapper p,
+    .exe-wikipedia-content ul.mw-gallery-packed-hover li.gallerybox.mw-gallery-focused div.gallerytextwrapper p{text-overflow:clip;white-space:normal;overflow:visible}
+}
+.exe-wikipedia-content .infobox,
+.exe-wikipedia-content .infobox_v2{text-align:left;font-size:90%}
+.exe-wikipedia-content .mw-jump-link,
+.exe-wikipedia-content .mw-authority-control{position:absolute!important;clip:rect(1px 1px 1px 1px);clip:rect(1px, 1px, 1px, 1px)}
+.exe-wikipedia-content .printfooter{margin-top:1.5em}
+.exe-wikipedia-content .mw-editsection,
+.exe-wikipedia-content .wikidata-link{display:none}
+.exe-wikipedia-content .wikitable{background-color:#f8f9fa;color:#222;margin:1em 0;border:1px solid #a2a9b1;border-collapse:collapse}
+.exe-wikipedia-content .wikitable>*>tr>td,
+.exe-wikipedia-content .wikitable>*>tr>th,
+.exe-wikipedia-content .wikitable>tr>td,
+.exe-wikipedia-content .wikitable>tr>th{border:1px solid #a2a9b1;padding:.2em .4em}
+.exe-wikipedia-content .wikitable>*>tr>th,
+.exe-wikipedia-content .wikitable>tr>th{background-color:#eaecf0;text-align:center}.wikitable>caption{font-weight:700}
+/* #665 */
+.exe-wikipedia-content .vector-page-toolbar,
+.exe-wikipedia-content main.mw-body #vector-toc-collapsed-button,
+.exe-wikipedia-content main.mw-body #vector-page-titlebar-toc,
+.exe-wikipedia-content main.mw-body #p-lang-btn{display:none}
+/* TinyMCE (in eXe) */
+#tinymce .exe-wikipedia-content{position:relative}
+#tinymce .exe-wikipedia-content:first-of-type:before{content:"Wikipedia";color:#666;font-size: .8em;font-style:italic;position:absolute;top: 5px;right: 5px;}
+#tinymce .exe-wikipedia-content{padding: 20px;border: 1px dotted #000}
+#tinymce .exe-wikipedia-content .exe-wikipedia-content{padding: 0;border: 0;}
+#tinymce .exe-wikipedia-content .exe-wikipedia-content:before{content:""}

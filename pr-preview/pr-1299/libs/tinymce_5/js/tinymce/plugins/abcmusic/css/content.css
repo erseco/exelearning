@@ -1,0 +1,44 @@
+pre.abc-music{background:#FCF9BB;padding:1em;margin:2em;font-family:inherit; height: fit-content;max-width: 700px;margin: 0 auto;}
+pre.abc-music:before{color:#666;font-size:.8em;font-style:italic;text-align:right;display:block}
+div.abc-music-paper{background:#FCF9BB;padding:1em;font-family:inherit}
+div.abcjs-paper{background:#FCF9BB;}
+/* link midi download */
+div.abcjs-download-midi a{color: currentColor;}
+
+/* CSS styles for musical notes animation */
+
+.abcjs-feedback {
+    height: 600px;
+    font-family: Arial, "sans-serif";
+}
+
+.abcjs-highlight {
+    fill: #0a9ecc;
+}
+
+.abcjs-cursor {
+    stroke: red;
+}
+
+.abcjs-click-explanation {
+    color: red;
+    font-style: italic;
+}
+
+.abcjs-beat {
+    font-weight: bold;
+}
+
+.abcjs-midi {
+    margin-top: 20px;
+    margin-left: 5px;
+}
+
+.abcjs-seek-controls {
+    margin-top: 5px;
+}
+
+.abcjs-seek-controls.disabled {
+    background-color: #cccccc;
+    opacity: 0.5;
+}
