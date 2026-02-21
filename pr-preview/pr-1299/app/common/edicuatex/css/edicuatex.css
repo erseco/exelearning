@@ -235,6 +235,18 @@ a {
     margin-top: -3px;
 }
 
+#maximize-btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+#settings-btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
 #settings-btn:hover, #maximize-btn:hover {
     color: var(--primary-color);
     transform: rotate(45deg);

@@ -150,9 +150,10 @@ async function initializeLatexEditor() {
         return trimmed;
     }
 
-    function autoPickDelimiter(latexFragment){
+    function autoPickDelimiter(latexFragment, options){
         const selectorEl = document.getElementById('delimiter-selector');
         if(!selectorEl || !latexFragment) return;
+        const opts = options || {};
         const frag = latexFragment.trim();
         
         if(/^\\\(.+?\\\)$/.test(frag)){ selectorEl.value = 'parentheses'; return; }
@@ -160,7 +161,12 @@ async function initializeLatexEditor() {
         if(/^\$\$([\s\S]+?)\$\$$/.test(frag)){ selectorEl.value = 'double_dollar'; return; }
         if(/^\$([\s\S]+?)\$$/.test(frag)){ selectorEl.value = 'single_dollar'; return; }
 
-        // If no delimiter is found, default based on context
+        // For prefilled selections with no delimiters, keep raw insertion (no wrapping).
+        // When opening empty in eXe, the default remains "parentheses" below.
+        if (opts.fromSelection) {
+            selectorEl.value = 'none';
+            return;
+        }
         selectorEl.value = isInExe ? 'parentheses' : 'none';
     }
     
@@ -198,7 +204,7 @@ async function initializeLatexEditor() {
     const urlSel = new URLSearchParams(window.location.search).get('sel');
     if (urlSel) {
         const originalSel = decodeURIComponent(urlSel);
-        autoPickDelimiter(originalSel);
+        autoPickDelimiter(originalSel, { fromSelection: true });
         latexInput.value = stripLatexDelimiters(originalSel);
     }
 
@@ -207,7 +213,7 @@ async function initializeLatexEditor() {
         if (window.opener && window.opener.PasteMathDialog && window.opener.PasteMathDialog.mathEditor && window.opener.PasteMathDialog.mathEditor.field) {
             const parentLatex = window.opener.PasteMathDialog.mathEditor.field.val().trim();
             if (parentLatex) {
-                autoPickDelimiter(parentLatex);
+                autoPickDelimiter(parentLatex, { fromSelection: true });
                 latexInput.value = stripLatexDelimiters(parentLatex);
             }
         }
@@ -865,10 +871,8 @@ async function initializeLatexEditor() {
     maximizeBtn.addEventListener('click', () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen().catch(err => console.log(err));
-            maximizeBtn.textContent = '🗗';
         } else {
             document.exitFullscreen();
-            maximizeBtn.textContent = '🗖';
         }
     });
 
