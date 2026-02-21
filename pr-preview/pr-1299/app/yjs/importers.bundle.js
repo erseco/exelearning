@@ -10407,7 +10407,7 @@
             }
           }
           this.logger.log("[ElpxImporter] All pages created");
-        });
+        }, this.ydoc.clientID);
         this.logger.log("[ElpxImporter] Transaction completed successfully");
         this.reportProgress("structure", 80, "Structure imported");
       } catch (transactionErr) {
@@ -10473,7 +10473,7 @@
             }
           }
           this.logger.log("[ElpxImporter] All legacy pages created");
-        });
+        }, this.ydoc.clientID);
         this.logger.log("[ElpxImporter] Legacy transaction completed successfully");
         this.reportProgress("structure", 80, "Structure imported");
       } catch (transactionErr) {
