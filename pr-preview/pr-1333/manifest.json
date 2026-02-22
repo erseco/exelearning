@@ -1,5 +1,5 @@
 {
-  "name": "eXeLearning Editor (v0.0.0-pr1333-202602200707)",
+  "name": "eXeLearning Editor (v0.0.0-pr1333-202602221251)",
   "short_name": "eXeLearning",
   "description": "Create interactive educational content offline. Open source authoring tool for educators.",
   "start_url": "./index.html",
@@ -64,5 +64,5 @@
   "launch_handler": {
     "client_mode": "navigate-existing"
   },
-  "id": "exelearning-v0.0.0-pr1333-202602200707-32bf33c"
+  "id": "exelearning-v0.0.0-pr1333-202602221251-020166a"
 }
