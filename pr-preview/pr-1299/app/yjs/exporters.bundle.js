@@ -6165,6 +6165,17 @@ ${FONT_SELECTORS} {
       eo: "Malpligrandigi tekston",
       ro: "Mic\u0219oreaz\u0103 dimensiunea textului"
     },
+    uppercase_text: {
+      en: "Uppercase",
+      es: "May\xFAsculas",
+      ca: "Maj\xFAscules",
+      va: "Maj\xFAscules",
+      gl: "Mai\xFAsculas",
+      eu: "Maiuskulak",
+      pt: "Mai\xFAsculas",
+      eo: "Majuskloj",
+      ro: "Majuscule"
+    },
     read: {
       en: "Read",
       es: "Leer",
