@@ -17,9 +17,14 @@ import '../../../../../../../public/vitest.setup.js';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { createRequire } from 'module';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
+const {
+  eXeEditorContentSanitizer,
+} = require(join(__dirname, '../../../../../../app/editor/tinymce_5_settings.js'));
 
 /**
  * Helper to load iDevice file and expose $exeDevice globally.
@@ -37,6 +42,9 @@ describe('text iDevice', () => {
   let mockElement;
 
   beforeEach(() => {
+    global.eXeEditorContentSanitizer = eXeEditorContentSanitizer;
+    window.eXeEditorContentSanitizer = eXeEditorContentSanitizer;
+
     // Reset $exeDevice before loading
     global.$exeDevice = undefined;
 
@@ -355,6 +363,28 @@ describe('text iDevice', () => {
       // dataIds should include textTextarea
       expect($exeDevice.dataIds).toContain('textTextarea');
       expect($exeDevice.textTextarea).toBe('<p>TinyMCE content</p>');
+    });
+
+    it('removes transient injected comments before persisting textarea content', async () => {
+      $exeDevice.init(mockElement, {});
+
+      const editor = await createTinyMCEEditor('textTextarea', {
+        content: '<p>Test content</p><!--a=1--><!----comment node----><!--a=1-->',
+      });
+      tinymce.editors.textTextarea = editor;
+      const feedbackEditor = await createTinyMCEEditor('textFeedbackTextarea', {
+        content: '<p>Feedback</p><!--a=1-->',
+      });
+      tinymce.editors.textFeedbackTextarea = feedbackEditor;
+
+      $exeDevice.text = '<p>Test content</p>';
+
+      const result = $exeDevice.save();
+
+      expect(result.textTextarea).toContain('<p>Test content</p>');
+      expect(result.textTextarea).not.toContain('<!--a=1-->');
+      expect(result.textTextarea).not.toContain('comment node');
+      expect(result.textFeedbackTextarea.trim()).toBe('<p>Feedback</p>');
     });
 
     it('collects input values from DOM', async () => {
@@ -968,6 +998,23 @@ describe('text iDevice', () => {
       // Feedback fieldset must be expanded because it has content
       const feedbackFieldset = mockElement.querySelector('#textFeedback');
       expect(feedbackFieldset.classList.contains('exe-fieldset-open')).toBe(true);
+    });
+
+    it('ignores transient injected comments when loading previousData', () => {
+      const previousData = {
+        textTextarea: '<p>Intro</p><!--a=1--><!----comment node----><!--a=1--><div class="iDevice_buttons feedback-button js-required"><input type="button" class="feedbacktooglebutton" value="Show" /></div><div class="feedback js-feedback js-hidden"><p>Feedback</p></div>',
+      };
+
+      $exeDevice.init(mockElement, previousData);
+
+      const textarea = mockElement.querySelector('#textTextarea');
+      const feedbackInput = mockElement.querySelector('#textFeedbackInput');
+      const feedbackTextarea = mockElement.querySelector('#textFeedbackTextarea');
+
+      expect(textarea.value).toBe('<p>Intro</p>');
+      expect(textarea.value).not.toContain('comment node');
+      expect(feedbackInput.value).toBe('Show');
+      expect(feedbackTextarea.value).toContain('<p>Feedback</p>');
     });
   });
 });

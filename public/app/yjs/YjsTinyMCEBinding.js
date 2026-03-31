@@ -187,14 +187,14 @@ class YjsTinyMCEBinding {
     this._isUpdating = true;
 
     try {
-      let content = this.yText.toString();
+      let content = this.sanitizeHtmlForPersistence(this.yText.toString());
 
       // Convert asset:// URLs to blob: URLs for display in editor
       content = this.convertAssetUrlsToBlobUrls(content);
 
-      const currentContent = this.editor.getContent();
+      const currentContent = this.sanitizeHtmlForPersistence(this.editor.getContent());
 
-      if (content !== currentContent) {
+      if (this.normalizeHtmlForComparison(content) !== this.normalizeHtmlForComparison(currentContent)) {
         // Save cursor position
         const bookmark = this.editor.selection?.getBookmark(2, true);
 
@@ -247,12 +247,30 @@ class YjsTinyMCEBinding {
     });
   }
 
+  getContentSanitizer() {
+    return window.eXeEditorContentSanitizer || {
+      sanitizeEditorHtmlForPersistence: (html) => (typeof html === 'string' ? html : (html || '')),
+      normalizeEditorHtmlForComparison: (html) => {
+        const value = typeof html === 'string' ? html : (html || '');
+        return value.replace(/>\s+</g, '><').trim();
+      },
+    };
+  }
+
+  sanitizeHtmlForPersistence(html) {
+    return this.getContentSanitizer().sanitizeEditorHtmlForPersistence(html);
+  }
+
+  normalizeHtmlForComparison(html) {
+    return this.getContentSanitizer().normalizeEditorHtmlForComparison(html);
+  }
+
   /**
    * Sync TinyMCE editor content to Y.Text
    * Converts blob: URLs and data-asset-url attributes to asset:// URLs before persisting
    */
   syncFromEditor() {
-    let content = this.editor.getContent();
+    let content = this.sanitizeHtmlForPersistence(this.editor.getContent());
 
     // Step 1: Convert data-asset-url attributes to proper src values
     // This handles images inserted via file picker which use data: URLs with data-asset-url attr
@@ -261,10 +279,13 @@ class YjsTinyMCEBinding {
     // Step 2: Convert blob: URLs to asset:// URLs before saving to Yjs
     // This handles images from drag & drop which use blob: URLs
     content = this.convertBlobUrlsToAssetUrls(content);
+    content = this.sanitizeHtmlForPersistence(content);
 
     const currentYText = this.yText.toString();
+    const normalizedContent = this.normalizeHtmlForComparison(content);
+    const normalizedCurrentYText = this.normalizeHtmlForComparison(currentYText);
 
-    if (content === currentYText) return;
+    if (normalizedContent === normalizedCurrentYText) return;
 
     // Use diff to apply minimal changes
     const diff = this.computeDiff(currentYText, content);

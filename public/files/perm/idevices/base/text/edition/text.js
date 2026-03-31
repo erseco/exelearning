@@ -63,6 +63,8 @@ var $exeDevice = {
             return null;
         }
 
+        html = this.sanitizeEditorHtmlForPersistence(html);
+
         // Check if we have exe-text-activity structure OR simple feedback structure.
         // Use structural markers (js-feedback + iDevice_buttons) instead of button class names
         // so both legacy eXe 2.9 (feedbackbutton) and modern (feedbacktooglebutton) formats are detected.
@@ -149,8 +151,8 @@ var $exeDevice = {
         const participantsValue = this[this.infoInputParticipantsId] || '';
         const participantsLabel = this[this.infoInputParticipantsTextId] || '';
         const feedbackButton = this[this.feedbakInputId] || '';
-        const feedbackContent = this[this.feedbackTextareaId] || '';
-        const mainContent = this[this.textareaId] || '';
+        const feedbackContent = this.sanitizeEditorHtmlForPersistence(this[this.feedbackTextareaId] || '');
+        const mainContent = this.sanitizeEditorHtmlForPersistence(this[this.textareaId] || '');
 
         // Check if we have any task info to include
         const hasTaskInfo = durationValue || participantsValue;
@@ -158,7 +160,7 @@ var $exeDevice = {
 
         // If no task info and no feedback, return just the content
         if (!hasTaskInfo && !hasFeedback) {
-            return mainContent;
+            return this.sanitizeEditorHtmlForPersistence(mainContent);
         }
 
         // Build the exe-text-activity structure
@@ -187,7 +189,7 @@ var $exeDevice = {
         }
 
         // Wrap in exe-text-activity container
-        return `<div class="exe-text-activity">${html}</div>`;
+        return this.sanitizeEditorHtmlForPersistence(`<div class="exe-text-activity">${html}</div>`);
     },
 
     /**
@@ -212,6 +214,67 @@ var $exeDevice = {
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
+    },
+
+    getEditorContentSanitizer: function () {
+        if (typeof window !== 'undefined' && window.eXeEditorContentSanitizer) {
+            return window.eXeEditorContentSanitizer;
+        }
+        if (typeof globalThis !== 'undefined' && globalThis.eXeEditorContentSanitizer) {
+            return globalThis.eXeEditorContentSanitizer;
+        }
+        return {
+            sanitizeEditorHtmlForPersistence: function (html) {
+                if (typeof html !== 'string' || html === '') {
+                    return html || '';
+                }
+
+                const doc = new DOMParser().parseFromString(`<body>${html}</body>`, 'text/html');
+                const body = doc.body;
+                const nodesToRemove = [];
+                const walker = doc.createTreeWalker(body, NodeFilter.SHOW_ALL);
+
+                const isTransientComment = function (value) {
+                    const marker = String(value || '')
+                        .replace(/^-+/, '')
+                        .replace(/-+$/, '')
+                        .trim()
+                        .toLowerCase();
+                    return marker === '' || marker === 'comment node' || /^a=\d+$/i.test(marker);
+                };
+
+                let node = walker.currentNode;
+                while (node) {
+                    if (node.nodeType === Node.COMMENT_NODE && isTransientComment(node.nodeValue)) {
+                        nodesToRemove.push(node);
+                    } else if (
+                        node.nodeType === Node.ELEMENT_NODE &&
+                        node.tagName === 'SPAN' &&
+                        node.attributes.length === 0 &&
+                        node.childNodes.length === 0 &&
+                        !(node.textContent || '').trim()
+                    ) {
+                        nodesToRemove.push(node);
+                    }
+                    node = walker.nextNode();
+                }
+
+                nodesToRemove.forEach((item) => item.remove());
+                return body.innerHTML;
+            },
+            normalizeEditorHtmlForComparison: function (html) {
+                const sanitized = this.sanitizeEditorHtmlForPersistence(html);
+                return sanitized.replace(/>\s+</g, '><').trim();
+            },
+        };
+    },
+
+    sanitizeEditorHtmlForPersistence: function (html) {
+        return this.getEditorContentSanitizer().sanitizeEditorHtmlForPersistence(html);
+    },
+
+    normalizeEditorHtmlForComparison: function (html) {
+        return this.getEditorContentSanitizer().normalizeEditorHtmlForComparison(html);
     },
 
     /**
@@ -254,7 +317,7 @@ var $exeDevice = {
 
         this.dataIds.forEach((element) => {
             if (element.includes('Textarea')) {
-                this[element] = tinymce.editors[element].getContent();
+                this[element] = this.sanitizeEditorHtmlForPersistence(tinymce.editors[element].getContent());
             } else if (element.includes('Input')) {
                 this[element] = this.ideviceBody.querySelector(
                     `#${element}`
@@ -334,7 +397,12 @@ var $exeDevice = {
         let data = { ...this.idevicePreviousData };
 
         if (typeof data[this.textareaId] === 'string' && data[this.textareaId]) {
-            data[this.textareaId] = this.stripLegacyExeTextWrapper(data[this.textareaId]);
+            data[this.textareaId] = this.stripLegacyExeTextWrapper(
+                this.sanitizeEditorHtmlForPersistence(data[this.textareaId])
+            );
+        }
+        if (typeof data[this.feedbackTextareaId] === 'string' && data[this.feedbackTextareaId]) {
+            data[this.feedbackTextareaId] = this.sanitizeEditorHtmlForPersistence(data[this.feedbackTextareaId]);
         }
 
         // Check for embedded task info or simple feedback in textTextarea.

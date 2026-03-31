@@ -1,3 +1,81 @@
+var eXeEditorContentSanitizer = {
+    getCommentMarker: function (value) {
+        return String(value || '')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '')
+            .trim()
+            .toLowerCase();
+    },
+
+    isTransientComment: function (value) {
+        const marker = this.getCommentMarker(value);
+        return marker === '' || marker === 'comment node' || /^a=\d+$/i.test(marker);
+    },
+
+    shouldRemoveElement: function (element) {
+        if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+            return false;
+        }
+
+        if (
+            element.tagName === 'SPAN' &&
+            element.attributes.length === 0 &&
+            element.childNodes.length === 0 &&
+            !(element.textContent || '').trim()
+        ) {
+            return true;
+        }
+
+        return false;
+    },
+
+    sanitizeEditorHtmlForPersistence: function (html, options) {
+        if (typeof html !== 'string' || html === '') {
+            return html || '';
+        }
+
+        const config = {
+            preserveAuthoredComments: true,
+            ...(options || {}),
+        };
+
+        const doc = new DOMParser().parseFromString(`<body>${html}</body>`, 'text/html');
+        const body = doc.body;
+        const nodesToRemove = [];
+        const walker = doc.createTreeWalker(body, NodeFilter.SHOW_ALL);
+
+        let node = walker.currentNode;
+        while (node) {
+            if (node.nodeType === Node.COMMENT_NODE) {
+                const shouldRemove =
+                    !config.preserveAuthoredComments || this.isTransientComment(node.nodeValue);
+                if (shouldRemove) {
+                    nodesToRemove.push(node);
+                }
+            } else if (this.shouldRemoveElement(node)) {
+                nodesToRemove.push(node);
+            }
+
+            node = walker.nextNode();
+        }
+
+        nodesToRemove.forEach((item) => item.remove());
+        return body.innerHTML;
+    },
+
+    normalizeEditorHtmlForComparison: function (html, options) {
+        const sanitized = this.sanitizeEditorHtmlForPersistence(html, options);
+        return sanitized.replace(/>\s+</g, '><').trim();
+    },
+};
+
+if (typeof window !== 'undefined') {
+    window.eXeEditorContentSanitizer = eXeEditorContentSanitizer;
+}
+if (typeof globalThis !== 'undefined') {
+    globalThis.eXeEditorContentSanitizer = eXeEditorContentSanitizer;
+}
+
 var $exeTinyMCE = {
     // imagetools is disabled because it generates base64 images
     // colorpicker contextmenu textcolor . Añadidos al core, no hace falta añadir en plugins?
@@ -185,6 +263,14 @@ var $exeTinyMCE = {
         });
 
         return temp.innerHTML;
+    },
+
+    sanitizeEditorHtmlForPersistence: function (html, options) {
+        return eXeEditorContentSanitizer.sanitizeEditorHtmlForPersistence(html, options);
+    },
+
+    normalizeEditorHtmlForComparison: function (html, options) {
+        return eXeEditorContentSanitizer.normalizeEditorHtmlForComparison(html, options);
     },
 
     // Get classes from base.css and style.css
@@ -594,6 +680,18 @@ var $exeTinyMCE = {
                 this.buttons3,
             ],
             setup: function (ed) {
+                ed.on('BeforeSetContent', function (e) {
+                    if (typeof e.content === 'string') {
+                        e.content = $exeTinyMCE.sanitizeEditorHtmlForPersistence(e.content);
+                    }
+                });
+
+                ed.on('GetContent', function (e) {
+                    if (typeof e.content === 'string') {
+                        e.content = $exeTinyMCE.sanitizeEditorHtmlForPersistence(e.content);
+                    }
+                });
+
                 // Register SetContent handler BEFORE content is loaded
                 // This is critical for resolving asset:// URLs in the initial content
                 ed.on('SetContent', function(e) {
@@ -1029,5 +1127,5 @@ var $exeTinyMCEToggler = {
 
 // Export for Node.js/CommonJS (tests)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { $exeTinyMCE, $exeTinyMCEToggler };
+    module.exports = { $exeTinyMCE, $exeTinyMCEToggler, eXeEditorContentSanitizer };
 }

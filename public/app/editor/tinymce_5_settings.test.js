@@ -35,6 +35,7 @@ globalThis.$exeTinyMCEToggler = {}; // Placeholder if needed
 const tinyMCEModule = require('./tinymce_5_settings.js');
 globalThis.$exeTinyMCE = tinyMCEModule.$exeTinyMCE;
 globalThis.$exeTinyMCEToggler = tinyMCEModule.$exeTinyMCEToggler;
+globalThis.eXeEditorContentSanitizer = tinyMCEModule.eXeEditorContentSanitizer;
 // Capture real init before any test can replace it (e.g. 'startEditor triggers TinyMCE init')
 const realExeTinyMCEInit = tinyMCEModule.$exeTinyMCE.init;
 
@@ -232,6 +233,16 @@ describe('TinyMCE 5 Settings', () => {
 
       expect(result).toContain('/files/perm/themes/base/INTEF/style.css');
       globalThis.eXeLearning.app.themes.selected = originalTheme;
+    });
+
+    it('sanitizes transient injected comments while preserving ordinary comments', () => {
+      const result = globalThis.$exeTinyMCE.sanitizeEditorHtmlForPersistence(
+        '<p>Hello</p><!-- note --><!--a=1--><!----comment node----><!-- -->',
+      );
+
+      expect(result).toContain('<!-- note -->');
+      expect(result).not.toContain('<!--a=1-->');
+      expect(result).not.toContain('comment node');
     });
 
     it('init calls tinymce.init with configurations', () => {

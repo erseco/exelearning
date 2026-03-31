@@ -10,6 +10,7 @@
 // Test functions available globally from vitest setup
 
 const YjsTinyMCEBinding = require('./YjsTinyMCEBinding');
+const { eXeEditorContentSanitizer } = require('../editor/tinymce_5_settings.js');
 
 const createYText = (content = '') => {
   const ydoc = new window.Y.Doc();
@@ -105,6 +106,7 @@ describe('YjsTinyMCEBinding', () => {
   let mockYText;
 
   beforeEach(() => {
+    window.eXeEditorContentSanitizer = eXeEditorContentSanitizer;
     mockEditor = createMockEditor('<p>Initial content</p>');
     mockYText = createYText('<p>Initial content</p>');
 
@@ -354,6 +356,20 @@ describe('YjsTinyMCEBinding', () => {
       expect(console.warn).toHaveBeenCalled();
 
       delete window.eXeLearning;
+    });
+
+    it('ignores transient injected comment nodes when comparing editor content', () => {
+      binding = new YjsTinyMCEBinding(mockEditor, mockYText);
+      const deleteSpy = spyOn(mockYText, 'delete');
+      const insertSpy = spyOn(mockYText, 'insert');
+
+      mockEditor._content = '<p>Initial content</p><!--a=1--><!----comment node----><!--a=1-->';
+
+      binding.syncFromEditor();
+
+      expect(deleteSpy).not.toHaveBeenCalled();
+      expect(insertSpy).not.toHaveBeenCalled();
+      expect(mockYText.toString()).toBe('<p>Initial content</p>');
     });
   });
 
